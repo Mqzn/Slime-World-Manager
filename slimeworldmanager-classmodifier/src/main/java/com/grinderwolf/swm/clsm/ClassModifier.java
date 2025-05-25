@@ -31,7 +31,7 @@ public class ClassModifier {
 
     private static CLSMBridge customLoader;
 
-    public static CompletableFuture getFutureChunk(Object world, int x, int z) {
+    public static CompletableFuture<Object> getFutureChunk(Object world, int x, int z) {
         if (customLoader == null) {
             return null;
         }
