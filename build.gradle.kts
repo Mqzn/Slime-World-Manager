@@ -8,11 +8,10 @@
  */
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import java.net.URI
 
 plugins {
     id("java")
-    id("maven-publish")
+    //id("maven-publish")
     id("com.github.johnrengelman.shadow") version "7.1.0"
 }
 
@@ -22,15 +21,11 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 subprojects {
     apply(plugin = "java-library")
-    apply(plugin = "maven-publish")
     apply(plugin = "com.github.johnrengelman.shadow")
 
     repositories {
         mavenLocal()
         mavenCentral()
-
-        maven(getNexusRepository("snapshots/"))
-        maven(getNexusRepository("releases/"))
 
         maven("https://jitpack.io")
         maven("https://repo.glaremasters.me/repository/concuncan/")
@@ -50,12 +45,6 @@ subprojects {
         sourceCompatibility = "11"
         targetCompatibility = "11"
     }
-
-    publishing {
-        repositories {
-            maven(getNexusRepository("snapshots/"))
-        }
-    }
 }
 
 configurations.all {
@@ -73,30 +62,3 @@ tasks.withType<JavaCompile> {
     targetCompatibility = "11"
 }
 
-publishing {
-    repositories {
-        maven(getNexusRepository("snapshots/"))
-    }
-
-    publications {
-        create<MavenPublication>("slimeworldmanager") {
-            groupId = "net.redeforce.slimeworldmanager"
-            artifactId = "slimeworldmanager"
-            version = "${project.version}-SNAPSHOT"
-
-            artifact(tasks["shadowJar"])
-        }
-    }
-}
-
-fun getNexusRepository(repository: String): (MavenArtifactRepository).() -> Unit = {
-    name = project.findProperty("force.name") as String
-    url = URI((project.findProperty("force.url") as String) + repository)
-
-    isAllowInsecureProtocol = true
-
-    credentials {
-        username = project.findProperty("force.user") as String
-        password = project.findProperty("force.password") as String
-    }
-}

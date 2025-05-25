@@ -22,6 +22,7 @@ import com.grinderwolf.swm.api.utils.SlimeFormat;
 import com.grinderwolf.swm.api.world.SlimeChunk;
 import com.grinderwolf.swm.api.world.SlimeChunkSection;
 import com.grinderwolf.swm.api.world.SlimeWorld;
+import com.grinderwolf.swm.api.world.properties.SlimeProperties;
 import com.grinderwolf.swm.api.world.properties.SlimePropertyMap;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -264,6 +265,7 @@ public class CraftSlimeWorld implements SlimeWorld {
                                 .getString(com.grinderwolf.swm.api.world.properties.SlimeProperties.DIFFICULTY)
                                 .toUpperCase())
                         .getValue())
+                .autoSave(propertyMap.getBoolean(com.grinderwolf.swm.api.world.properties.SlimeProperties.AUTO_SAVE))
                 .readOnly(readOnly)
                 .build();
     }

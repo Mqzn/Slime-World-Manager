@@ -27,6 +27,7 @@ public class SlimePropertyMap {
 
     public SlimePropertyMap() {
         this(new HashMap<>());
+        values.putIfAbsent(SlimeProperties.AUTO_SAVE, true);
     }
 
     /**

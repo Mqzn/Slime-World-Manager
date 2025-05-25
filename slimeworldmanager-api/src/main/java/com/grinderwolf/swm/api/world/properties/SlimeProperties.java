@@ -50,7 +50,12 @@ public class SlimeProperties {
                         || worldType.equalsIgnoreCase("default_1_1");
             });
 
+    public static final SlimeProperty AUTO_SAVE=
+            new SlimeProperty("auto-save", PropertyType.BOOLEAN, true, (value)-> {
+                String strVal = (String) value;
+                return strVal.equalsIgnoreCase("false") || strVal.equalsIgnoreCase("true");
+            });
     public static final SlimeProperty[] VALUES = {
-        SPAWN_X, SPAWN_Y, SPAWN_Z, DIFFICULTY, ALLOW_MONSTERS, ALLOW_ANIMALS, PVP, ENVIRONMENT, WORLD_TYPE
+        SPAWN_X, SPAWN_Y, SPAWN_Z, DIFFICULTY, ALLOW_MONSTERS, ALLOW_ANIMALS, PVP, ENVIRONMENT, WORLD_TYPE, AUTO_SAVE
     };
 }

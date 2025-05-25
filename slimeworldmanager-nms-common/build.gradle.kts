@@ -24,14 +24,3 @@ tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
     archiveFileName.set("${project.name}-${version}.jar")
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("slimeworldmanager-nms-common") {
-            groupId = "net.redeforce.slimeworldmanager"
-            artifactId = "slimeworldmanager-nms-common"
-            version = "${project.version}-SNAPSHOT"
-
-            artifact(tasks["shadowJar"])
-        }
-    }
-}

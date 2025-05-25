@@ -80,6 +80,10 @@ public class CustomWorldServer extends WorldServer {
 
     @Override
     public void save(boolean forceSave, IProgressUpdate progressUpdate) throws ExceptionWorldConflict {
+        if(!forceSave && !slimeWorld.getPropertyMap().getBoolean(SlimeProperties.AUTO_SAVE)) {
+            return;
+        }
+
         if (!slimeWorld.isReadOnly()) {
             super.save(forceSave, progressUpdate);
 
@@ -91,9 +95,8 @@ public class CustomWorldServer extends WorldServer {
                 try {
                     slimeWorld.getLoader().unlockWorld(slimeWorld.getName());
                 } catch (IOException ex) {
-                    LOGGER.error("Failed to unlock the world "
-                            + slimeWorld.getName()
-                            + ". Please unlock it manually by using the command /swm manualunlock. Stack trace:");
+                    LOGGER.error("Failed to unlock the world {}. Please unlock it manually by using the command /swm manualunlock. Stack trace:",
+                            slimeWorld.getName());
 
                     ex.printStackTrace();
                 } catch (UnknownWorldException ignored) {
@@ -110,7 +113,7 @@ public class CustomWorldServer extends WorldServer {
             // simultaneously
             try {
                 if (DEBUG_SAVES) {
-                    LOGGER.info("Saving world " + slimeWorld.getName() + "...");
+                    LOGGER.info("Saving world {}...", slimeWorld.getName());
                 }
 
                 long start = System.currentTimeMillis();
@@ -118,11 +121,7 @@ public class CustomWorldServer extends WorldServer {
                 slimeWorld.getLoader().saveWorld(slimeWorld.getName(), serializedWorld, false);
 
                 if (DEBUG_SAVES) {
-                    LOGGER.info("World "
-                            + slimeWorld.getName()
-                            + " saved in "
-                            + (System.currentTimeMillis() - start)
-                            + "ms.");
+                    LOGGER.info("World {} saved in {}ms.", slimeWorld.getName(), System.currentTimeMillis() - start);
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();

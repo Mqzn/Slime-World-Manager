@@ -48,15 +48,3 @@ bukkit {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("slimeworldmanager-plugin") {
-            groupId = "net.redeforce.slimeworldmanager"
-            artifactId = "slimeworldmanager-plugin"
-            version = "${project.version}-SNAPSHOT"
-
-            artifact(tasks["shadowJar"])
-        }
-    }
-}
-

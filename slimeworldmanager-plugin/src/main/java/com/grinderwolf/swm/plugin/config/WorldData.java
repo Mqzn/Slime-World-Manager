@@ -51,6 +51,9 @@ public class WorldData {
     @Setting("readOnly")
     private boolean readOnly = false;
 
+    @Setting("auto-save")
+    private boolean autoSave = true;
+
     public SlimePropertyMap toPropertyMap() {
         try {
             Enum.valueOf(Difficulty.class, this.difficulty.toUpperCase());
@@ -100,7 +103,7 @@ public class WorldData {
         propertyMap.setBoolean(SlimeProperties.PVP, pvp);
         propertyMap.setString(SlimeProperties.ENVIRONMENT, environment);
         propertyMap.setString(SlimeProperties.WORLD_TYPE, worldType);
-
+        propertyMap.setBoolean(SlimeProperties.AUTO_SAVE, this.autoSave);
         return propertyMap;
     }
 }

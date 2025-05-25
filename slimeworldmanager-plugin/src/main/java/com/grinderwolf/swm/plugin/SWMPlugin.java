@@ -331,7 +331,7 @@ public class SWMPlugin extends JavaPlugin implements SlimePlugin {
         propertyMap.setBoolean(SlimeProperties.ALLOW_ANIMALS, properties.allowAnimals());
         propertyMap.setBoolean(SlimeProperties.PVP, properties.isPvp());
         propertyMap.setString(SlimeProperties.ENVIRONMENT, properties.getEnvironment());
-
+        propertyMap.setBoolean(SlimeProperties.AUTO_SAVE, properties.isAutoSave());
         return propertyMap;
     }
 
